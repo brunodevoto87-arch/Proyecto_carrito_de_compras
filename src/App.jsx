@@ -5,17 +5,19 @@ import './App.css'
 function App() {
   const [cart, setCart] = useState([])
   const addToCart = (producto, cantidad) =>{
-    const existe = cart.find((item) => item.id === producto.id)
-    if (existe){
-      setCart(cart.map((item)=> 
-      item.id === producto.id
-      ? {...item, cantidad: item.cantidad + cantidad}
-      : item
-    ))
-    }
-    else{
-      setCart([...cart, {...producto, cantidad}])
-    }
+    setCart((cartAnterior) => {
+      const existe = cartAnterior.find((item) => item.id === producto.id)
+
+      if (existe){
+        return cartAnterior.map((item)=>
+          item.id === producto.id
+            ? {...item, cantidad: item.cantidad + cantidad}
+            : item
+        )
+      }
+
+      return [...cartAnterior, {...producto, cantidad}]
+    })
   }
 
    return (
