@@ -2,7 +2,7 @@ import {useOutletContext} from "react-router-dom"
 function Cart(){
     const {cart, setCart} = useOutletContext()
 
-    const total = cart.reduce((sum, item) => sum + item.price + item.cantidad, 0)
+    const total = cart.reduce((sum, item) => sum + item.price * item.cantidad, 0)
 
     const cambiarCantidad = (id, nuevaCantidad) =>{
         if (nuevaCantidad <= 0){
@@ -33,7 +33,7 @@ function Cart(){
                                 <h3>{item.title}</h3>
                                 <p>Precio: ${item.price}</p>
                                 <p>Cantidad: {item.cantidad}</p>
-                                <p>Subtotal: ${(item.price + item.cantidad).toFixed(2)}</p>
+                                <p>Subtotal: ${(item.price * item.cantidad).toFixed(2)}</p>
                                 <div className="cantidad-control">
                                     <button onClick={()=>(cambiarCantidad(item.id,item.cantidad -1))}>-</button>
                                     <span>{item.cantidad}</span>
